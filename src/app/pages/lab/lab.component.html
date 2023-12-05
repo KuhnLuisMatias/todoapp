@@ -1,0 +1,51 @@
+<div class="container">
+  <h1>Este es un titulo</h1>
+  <h2>{{ welcome }}</h2>
+
+  <ul>
+    <li *ngFor="let task of tasks">
+      {{ task }}
+    </li>
+  </ul>
+
+  <input type="text" [value]="person().name" />
+  <br />
+  <img [src]="person().avatar" alt="" />
+  <hr />
+  <button (click)="clickHandler()">Presioname</button>
+  <p>Key Down</p>
+  <input
+    type="text"
+    [value]="person().name"
+    (keydown)="keyDownHandler($event)"
+  />
+  <p>Key Down v2</p>
+  <input
+    type="text"
+    [value]="person().name"
+    (keydown.shift.t)="clickHandler()"
+  />
+
+  <hr />
+  <h1>Signals</h1>
+  <input type="text" [value]="person().name" (change)="changeHandler($event)" />
+  <p>Name: {{ person().name }}</p>
+  <p>Age:</p>
+  <input
+    type="number"
+    [value]="person().age"
+    (change)="changeAgeHandler($event)"
+  />
+  <div *ngIf="person().age >= 18; else elseBlock">Sí es mayor de edad</div>
+  <ng-template #elseBlock> No es mayor de edad </ng-template>
+
+  <div [ngSwitch]="person().age">
+    <p *ngSwitchCase="15">Casi</p>
+    <p *ngSwitchCase="16">Ya Casi</p>
+    <p *ngSwitchCase="17">A nada ...</p>
+    <p *ngSwitchCase="18">Es Legal.</p>
+  </div>
+  <hr />
+  <input type="color" [formControl]="colorCtrl" />
+  <p>Color: {{ colorCtrl.value }}</p>
+</div>
