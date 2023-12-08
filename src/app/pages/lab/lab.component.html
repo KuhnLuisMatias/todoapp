@@ -2,10 +2,20 @@
   <h1>Este es un titulo</h1>
   <h2>{{ welcome }}</h2>
 
+  <!-- Vieja Sintaxis-->
   <ul>
-    <li *ngFor="let task of tasks">
+    <li *ngFor="let task of tasks()">
       {{ task }}
     </li>
+  </ul>
+
+  <!-- Nueva Sintaxis-->
+  <ul>
+    @for(task of tasks(); track task;let i = $index) {
+    <li>{{ i }} {{ task }}</li>
+    }@empty{
+    <li><strong>Lista vacia</strong></li>
+    }
   </ul>
 
   <input type="text" [value]="person().name" />
@@ -36,15 +46,38 @@
     [value]="person().age"
     (change)="changeAgeHandler($event)"
   />
+  <!-- Vieja Sintaxis -->
   <div *ngIf="person().age >= 18; else elseBlock">Sí es mayor de edad</div>
   <ng-template #elseBlock> No es mayor de edad </ng-template>
+  <!-- Nueva Sintaxis-->
+  @if(person().age >=18){
+  <div>Sí es mayor de edad</div>
+  } @else{
+  <div>No es mayor de edad</div>
+  }
 
+  <hr />
+  <!-- Vieja Sintaxis-->
   <div [ngSwitch]="person().age">
     <p *ngSwitchCase="15">Casi</p>
     <p *ngSwitchCase="16">Ya Casi</p>
     <p *ngSwitchCase="17">A nada ...</p>
     <p *ngSwitchCase="18">Es Legal.</p>
   </div>
+
+  <!-- Nueva sintaxis-->
+  <div>
+    @switch (person().age) { @case (15) {
+    <p>Casi</p>
+    } @case (16) {
+    <p>Ya Casi</p>
+    } @case (17) {
+    <p>A nada ...</p>
+    } @case (18) {
+    <p>Es legal.</p>
+    } }
+  </div>
+
   <hr />
   <input type="color" [formControl]="colorCtrl" />
   <p>Color: {{ colorCtrl.value }}</p>

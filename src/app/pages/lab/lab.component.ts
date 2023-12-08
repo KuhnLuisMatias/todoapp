@@ -11,7 +11,7 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 })
 export class LabComponent {
   welcome = 'Subtitulo';
-  tasks = ['Primera', 'Segunda', 'Tercera'];
+  tasks = signal(['Primera', 'Segunda', 'Tercera']);
 
   person = signal({
     name: 'Matias',
